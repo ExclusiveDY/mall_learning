@@ -82,5 +82,4 @@ public class ServerResponse<T> implements Serializable {
         return new ServerResponse<T>(errorCode, errorMessage);
     }
 
-
 }
