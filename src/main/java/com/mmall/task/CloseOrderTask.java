@@ -1,12 +1,10 @@
-package com.mmall.tack;
+package com.mmall.task;
 
 import com.mmall.common.Const;
 import com.mmall.common.RedissonManager;
-import com.mmall.dao.OrderMapper;
 import com.mmall.service.IOrderService;
 import com.mmall.util.PropertiesUtil;
 import com.mmall.util.RedisShardedPoolUtil;
-import javafx.beans.property.Property;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.redisson.api.RLock;
