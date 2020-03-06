@@ -61,13 +61,13 @@ public class CloseOrderTask {
         RedisShardedPoolUtil.expire(lockName, 5); // 设置锁的有效期为5秒，防止死锁
         log.info("获取{}, ThreadName:{}", Const.REDIS_LOCK.CLOSED_ORDER_TASK_LOCK, Thread.currentThread().getName());
         int hour = Integer.parseInt(PropertiesUtil.getProperty("close.order.task.time.hour", "2"));
-//        iOrderService.closeOrder(hour);
+        iOrderService.closeOrder(hour);
         RedisShardedPoolUtil.del(Const.REDIS_LOCK.CLOSED_ORDER_TASK_LOCK);
         log.info("释放{}，ThreadName:{}", Const.REDIS_LOCK.CLOSED_ORDER_TASK_LOCK, Thread.currentThread().getName());
         log.info("===========================================================");
    }
 
-//    @Scheduled(cron = "0 */1 * * * ?") //每个一分钟的整数倍
+    @Scheduled(cron = "0 */1 * * * ?") //每个一分钟的整数倍
     public void closeOrderTaskV3() {
         log.info("关闭订单定时任务启动");
         long lockTimeout = Integer.parseInt(PropertiesUtil.getProperty("lock.timeout", "50000"));
@@ -97,7 +97,7 @@ public class CloseOrderTask {
 
     }
 
-    @Scheduled(cron = "0 */1 * * * ?") //每个一分钟的整数倍
+//    @Scheduled(cron = "0 */1 * * * ?") //每个一分钟的整数倍
     public void closeOrderTaskV4() {
         RLock rLock = redissonManager.getRedisson().getLock(Const.REDIS_LOCK.CLOSED_ORDER_TASK_LOCK);
         boolean getLock = false;
